@@ -2,6 +2,8 @@ import { useState } from "react";
 
 function App() {
   const [randomDadJoke, setRandomDadJoke] = useState("");
+  const [keepVoteUp, setKeepVoteUp] = useState([]);
+  const [keepVoteDown, setKeepVoteDown] = useState([]);
   const handleclick = async () => {
     const url = "https://official-joke-api.appspot.com/random_joke";
     const response = await fetch(url);
@@ -9,11 +11,13 @@ function App() {
     setRandomDadJoke(joke.setup + " " + joke.punchline);
   };
   const voteUp = () => {
-    console.log("vote up!");
+    setKeepVoteUp([...keepVoteUp, randomDadJoke]);
+    setRandomDadJoke("");
   };
 
   const voteDown = () => {
-    console.log("vote Down!");
+    setKeepVoteDown([...keepVoteDown, randomDadJoke]);
+    setRandomDadJoke("");
   };
 
   return (
@@ -42,15 +46,23 @@ function App() {
       <div className="flex justify-around">
         <div id="vote up box">
           <button onClick={voteUp}>
-            <img src="Thumbs Up.png" alt="Thumbs Up" />
+            <img src="./images/ThumbsUp.jpg" alt="Thumbs Up" />
           </button>
-          <ul></ul>
+          <ul id="voteUpList">
+            {keepVoteUp.map((joke, index) => (
+              <li key={index}>{joke}</li>
+            ))}
+          </ul>
         </div>
         <div id="vote down box">
           <button onClick={voteDown}>
-            <img src="Thumbs Down.png" alt="Thumbs Down" />
+            <img src="./images/ThumbsDown.jpg" alt="Thumbs Down" />
           </button>
-          <ul></ul>
+          <ul id="voteDownList">
+            {keepVoteDown.map((joke, index) => (
+              <li key={index}>{joke}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </main>
