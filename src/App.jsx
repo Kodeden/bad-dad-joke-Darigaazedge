@@ -6,6 +6,7 @@ function App() {
   const [randomDadJoke, setRandomDadJoke] = useState("");
   const [keepVoteUp, setKeepVoteUp] = useState([]);
   const [keepVoteDown, setKeepVoteDown] = useState([]);
+
   const handleclick = async () => {
     const url = "https://official-joke-api.appspot.com/random_joke";
     const response = await fetch(url);
@@ -39,6 +40,7 @@ function App() {
       <div className="flex justify-center">
         <button
           type="submit"
+          data-testid="getDadJoke"
           className="rounded-full bg-green-500 p-4 text-white"
           onClick={handleclick}
         >
@@ -46,12 +48,12 @@ function App() {
         </button>
       </div>
       <div id="vote buttons" className="flex justify-around">
-        <button onClick={voteUp}>
+        <button data-testid="voteUpBtn" onClick={voteUp}>
           <img src={voteUpImage} alt="Thumbs Up" className="H-32 w-32" />
           Vote Up!!
         </button>
 
-        <button onClick={voteDown}>
+        <button data-testid="voteDownBtn" onClick={voteDown}>
           <img src={voteDownImage} alt="Thumbs Down" className="H-32 w-32" />{" "}
           Vote Down!!
         </button>
