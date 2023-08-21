@@ -1,4 +1,6 @@
 import { useState } from "react";
+import voteDownImage from "./images/ThumbsDown.png";
+import voteUpImage from "./images/ThumbsUp.png";
 
 function App() {
   const [randomDadJoke, setRandomDadJoke] = useState("");
@@ -43,21 +45,32 @@ function App() {
           Click for DadJoke
         </button>
       </div>
-      <div className="flex justify-around">
-        <div id="vote up box">
-          <button onClick={voteUp}>
-            <img src="./images/ThumbsUp.jpg" alt="Thumbs Up" />
-          </button>
+      <div id="vote buttons" className="flex justify-around">
+        <button onClick={voteUp}>
+          <img src={voteUpImage} alt="Thumbs Up" className="H-32 w-32" />
+          Vote Up!!
+        </button>
+
+        <button onClick={voteDown}>
+          <img src={voteDownImage} alt="Thumbs Down" className="H-32 w-32" />{" "}
+          Vote Down!!
+        </button>
+      </div>
+      <div className="flex justify-center space-x-4">
+        <div
+          className="container flex flex-col items-center border-4 p-4"
+          id="vote up box"
+        >
           <ul id="voteUpList">
             {keepVoteUp.map((joke, index) => (
               <li key={index}>{joke}</li>
             ))}
           </ul>
         </div>
-        <div id="vote down box">
-          <button onClick={voteDown}>
-            <img src="./images/ThumbsDown.jpg" alt="Thumbs Down" />
-          </button>
+        <div
+          className="container flex flex-col items-center border-4 p-4"
+          id="vote down box"
+        >
           <ul id="voteDownList">
             {keepVoteDown.map((joke, index) => (
               <li key={index}>{joke}</li>
